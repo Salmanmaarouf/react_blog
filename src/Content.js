@@ -5,35 +5,45 @@ import { useState } from "react"; // now we can use the useState hook inside of 
 
 
 const Content = () => {
-    const [name, setName] = useState('Dave');
-    const [count, setCount] = useState(0);
+    const [items, setItems] = useState(
+      {
+        id: 1,
+        checked: false,
+        item: "One half pound bag of Cocoa Covered Almonds Unsalted"
+      },
+      {
+        id: 2,
+        checked: false,
+        item: "Item 2"
+      },
+      {
+        id: 3,
+        checked: false,
+        item: "Item 3"
+      }
 
+    );
 
-    const handleNameChange = () => {
-      const names = ['Bob', 'Kevin', 'Dave'];
-      const int = Math.floor(Math.random() * 3); 
-      setName(names[int]);
-    }
-
-    const handleClick = () => {
-      setCount(count + 1)
-      console.log(count)
-    }
-    const handleClick2 = (name) => {
-      console.log(count)
-    }
-    const handleClick3 = (e) => {
-      console.log(e.target.innerText)
-    }
 
     return (
       <main>
-          <p onDoubleClick={handleClick}>
-              Hello {name}!
-          </p>
-          <button onClick={handleNameChange}>Change Name</button>
-          <button onClick={handleClick}>Click It</button>
-          <button onClick={handleClick2}>Click It</button>
+        <ul>
+          {items.map((item) => (
+            <li className = "item">
+              <input
+              type="checkbox"
+              checked={item.checked}
+              />
+              <label>
+                {item.item}
+              </label>
+              <button>
+                Delete
+              </button>
+            </li>
+
+          ))}
+        </ul>
       </main>
     )
 }
